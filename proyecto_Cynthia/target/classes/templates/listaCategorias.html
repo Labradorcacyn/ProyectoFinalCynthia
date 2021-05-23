@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Proyecto Cynthia Labrador</title>
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/slick.css" th:href="@{/css/slick.css}" />
+	<link type="text/css" rel="stylesheet" href="css/slick-theme.css" th:href="@{/css/slick-theme.css}" />
+
+	<!-- CSS -->
+	<link type="text/css" rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+	<!-- HEADER -->
+	<header>
+		<div id="top-header">
+			<div class="container">
+				<ul class="header-links pull-left">
+					<li><a href="#"><i class="fa fa-phone"></i> 954540963</a></li>
+					<li><a href="#"><i class="fa fa-envelope-o"></i>piercings@email.com</a></li>
+					<li><a href="#"><i class="fa fa-map-marker"></i> Calle
+							Condes de Bustillo</a></li>
+				</ul>
+				<ul class="header-links pull-right">
+					<li><a href="#"><i class="fa fa-user-o"></i>Login</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="#" class="logo"> <img src="./img/logo.png" th:src="@{/img/logo.png}" alt="Logo">
+							</a>
+						</div>
+					</div>
+					<!-- BUSCAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form action="/" method="get">
+								<input name="nombre" class="input" placeholder="Busca lo que necesites">
+								<button class="search-btn">Buscar</button>
+							</form>
+						</div>
+					</div>
+					<!-- CUENTA -->
+					<div class="col-md-3 clearfix">
+						<div class="header-ctn">
+							<div class="menu-toggle">
+								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<body>
+		<nav id="navigation">
+			<div class="container">
+				<div id="responsive-nav">
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="/productos" th:href="@{/}">Todos los productos</a></li>
+						<tr th:each="categoria : ${categorias}">
+							<li><a href="#" th:href="@{/?idCategoria={id} (id = ${categoria.idCategoria})}">
+									<td th:text="${categoria.nombre}"></td>
+								</a></li>
+						</tr>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<aside>
+			<div class="container">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="./productoForm.html" th:href="@{productos/nuevo}">Nuevo
+							Producto</a><br>
+						<a class="dropdown-item" href="./categoriaForm.html" th:href="@{categorias/nueva}">Nueva
+							Categoria</a><br>
+						<a class="dropdown-item" href="./listaCategorias.html" th:href="@{categorias}">Lista
+							Categorias</a>
+					</div>
+				</div>
+			</div>
+		</aside>
+
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="alert alert-warning alert-dismissible" role="alert" th:if="${param.error}">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<span>No puedes borrar una categoria con productos</span>
+					</div>
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">Lista de Productos</h3>
+						</div>
+					</div>
+					<tr th:each="categoria : ${categorias}">
+						<div class="product-body">
+							<h3 class="product-name">
+								<h3 th:text="${categoria.nombre}"></h3>
+							</h3>
+							<button class="borrado" type="button" data-toggle="modal"
+									data-target="#delete-modal" th:data-id="${categoria.idCategoria}"><i class="fa fa-times"></i></button>
+							<a href="#"
+							th:href="@{/categorias/editar/{id}(id=${categoria.idCategoria})}"><i class="fa fa-edit"></i></a><span class="tooltipp"></span>
+						</div>
+					</tr>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Borrar categoria</h4>
+					</div>
+					<div class="modal-body">
+						<p>Diga si quiere borrar la categoria</p>
+						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+						<a href="/categorias/borrar/" class="btn btn-danger">Si</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- FOOTER -->
+		<footer id="footer">
+			<div class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-xs-8">
+							<div class="footer">
+								<h3 class="footer-title">Sobre nosotros</h3>
+								<p>Te ofrecemos las ultimas tendencias, lo mas sorprendente y
+									una gran seleccion de mas de 80.000 productos en una gran
+									variedad de colores, diseños y tallas. Y para estar siempre a la
+									ultima, tenemos 2.000 productos nuevos al año.</p>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-6 col-xs-8">
+							<div class="footer">
+								<h3 class="footer-title">Informacion</h3>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>Calle
+											Condes de Bustillo</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>954540963</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>piercings@email.com</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/slick.min.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+
+</html>

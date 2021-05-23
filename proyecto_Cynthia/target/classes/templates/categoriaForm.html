@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Proyecto Cynthia Labrador</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+
+	<link type="text/css" rel="stylesheet" href="css/slick.css" th:href="@{/css/slick.css}"/>
+	<link type="text/css" rel="stylesheet" href="css/slick-theme.css" th:href="@{/css/slick-theme.css}"/>
+	<link type="text/css" rel="stylesheet" href="css/nouislider.min.css" th:href="@{/css/nouislider.css}"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+
+	<!-- CSS -->
+	<link type="text/css" rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+	<header>
+		<div id="top-header">
+			<div class="container">
+				<ul class="header-links pull-left">
+					<li><a href="#"><i class="fa fa-phone"></i> 954540963</a></li>
+					<li><a href="#"><i class="fa fa-envelope-o"></i>piercings@email.com</a></li>
+					<li><a href="#"><i class="fa fa-map-marker"></i> Calle
+							Condes de Bustillo</a></li>
+				</ul>
+				<ul class="header-links pull-right">
+					<li><a href="#"><i class="fa fa-user-o"></i>Login</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="#" class="logo"> <img src="./img/logo.png" th:src="@{/img/logo.png}" alt="Logo">
+							</a>
+						</div>
+					</div>
+					<!-- BUSCAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form action="/" method="get">
+								<input name="nombre" class="input" placeholder="Busca lo que necesites">
+								<button class="search-btn">Buscar</button>
+							</form>
+						</div>
+					</div>
+					<!-- CUENTA -->
+					<div class="col-md-3 clearfix">
+						<div class="header-ctn">
+							<div class="menu-toggle">
+								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<body>
+		<nav id="navigation">
+			<div class="container">
+				<div id="responsive-nav">
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="/productos" th:href="@{/}">Todos los productos</a></li>
+						<tr th:each="categoria : ${categorias}">
+							<li><a href="#" th:href="@{/?idCategoria={id} (id = ${categoria.idCategoria})}">
+									<td th:text="${categoria.nombre}"></td>
+							</a></li>
+						</tr>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-7">
+						<form method="post" action="#" th:action="@{/categorias/nueva/submit}" th:object="${categoria}">
+							<div class="billing-details">
+								<div class="section-title">
+									<h3 class="title">Datos Categoria</h3>
+								</div>
+								<h1>
+									<span th:text="${categoria.idCategoria} ? 'Editar' : 'Nueva'"></span>
+									Categoria
+								</h1>
+								<input type="hidden" th:field="*{idCategoria}" id="id" />
+
+								<div class="form-group">
+									<label for="nombre">Nombre</label> <input type="text" class="form-control"
+										id="nombre" placeholder="Nombre" th:field="*{nombre}" />
+								</div>
+								<button type="submit" class="btn btn-default">Enviar</button>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<div class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-xs-8">
+							<div class="footer">
+								<h3 class="footer-title">Sobre nosotros</h3>
+								<p>Te ofrecemos las últimas tendencias, lo más sorprendente y una gran selección de
+									más de 80.000 productos en una gran variedad de colores, diseños y tallas. Y para
+									estar siempre a la última, tenemos 2.000 productos nuevos al año.</p>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>Calle Condes de Bustillo</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>954540963</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>piercings@email.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-6 col-xs-8">
+							<div class="footer">
+								<h3 class="footer-title">Informacion</h3>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>Calle Condes de Bustillo</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>954540963</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>piercings@email.com</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/slick.min.js"></script>
+		<script src="js/nouislider.min.js"></script>
+		<script src="js/jquery.zoom.min.js"></script>
+		<script src="js/main.js"></script>
+		
+	</body>
+	
+</html>

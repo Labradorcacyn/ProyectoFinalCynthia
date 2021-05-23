@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+		<title>Proyecto Cynthia Labrador</title>
+	
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+		<link type="text/css" rel="stylesheet" href="css/slick.css" th:href="@{/css/slick.css}"/>
+		<link type="text/css" rel="stylesheet" href="css/slick-theme.css" th:href="@{/css/slick-theme.css}"/>
+	
+		<!-- CSS -->
+		<link type="text/css" rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}"/>
+	
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	
+	<body>
+	<header>
+		<div id="top-header">
+			<div class="container">
+				<ul class="header-links pull-left">
+					<li><a href="#"><i class="fa fa-phone"></i> 954540963</a></li>
+					<li><a href="#"><i class="fa fa-envelope-o"></i>piercings@email.com</a></li>
+					<li><a href="#"><i class="fa fa-map-marker"></i> Calle
+							Condes de Bustillo</a></li>
+				</ul>
+				<ul class="header-links pull-right">
+					<li><a href="#"><i class="fa fa-user-o"></i>Login</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="#" class="logo"> <img src="./img/logo.png" th:src="@{/img/logo.png}" alt="Logo">
+							</a>
+						</div>
+					</div>
+					<!-- BUSCAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form action="/" method="get">
+								<input name="nombre" class="input" placeholder="Busca lo que necesites">
+								<button class="search-btn">Buscar</button>
+							</form>
+						</div>
+					</div>
+					<!-- CUENTA -->
+					<div class="col-md-3 clearfix">
+						<div class="header-ctn">
+							<div class="menu-toggle">
+								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<body>
+		<nav id="navigation">
+			<div class="container">
+				<div id="responsive-nav">
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="/productos" th:href="@{/}">Todos los productos</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="product-img">
+							<img src="http://placehold.it/350x260" th:src="${#strings.isEmpty(producto.img)} ? 'http://placehold.it/350x260' : ${producto.img}"
+							class="img-responsive" alt="a" />
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="product-details">
+							<h2 class="product-name" th:text="${producto.nombre}"></h2>
+							<div>
+								<div class="product-rating">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<p>10 Review(s)</p>
+							</div>
+							<div>
+								<p>Precio</p>
+								<p th:text="${producto.precio} + 'EUR'"></p> 
+							</div>
+							<p th:text="${producto.descripcion}"></p>
+							<p th:text= "${'Color ' + producto.color}"></p>
+							<p th:text= "${'Grosor ' + producto.diametro + ' mm'}"></p>
+							<p th:text= "${#temporals.format(producto.registro, 'dd/MM/yyyy hh:mm')}">dd/mm/yyyy hh:mm</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- FOOTER -->
+		<footer id="footer">
+			<div class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-xs-8">
+							<div class="footer">
+								<h3 class="footer-title">Sobre nosotros</h3>
+								<p>Te ofrecemos las ultimas tendencias, lo mas sorprendente y
+									una gran seleccion de mas de 80.000 productos en una gran
+									variedad de colores, diseños y tallas. Y para estar siempre a la
+									ultima, tenemos 2.000 productos nuevos al año.</p>
+							</div>
+						</div>
+	
+						<div class="clearfix visible-xs"></div>
+	
+						<div class="col-md-6 col-xs-8">
+							<div class="footer">
+								<h3 class="footer-title">Informacion</h3>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>Calle
+											Condes de Bustillo</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>954540963</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>piercings@email.com</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/slick.min.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
